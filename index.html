@@ -58,12 +58,15 @@
             margin: 0 auto;
             padding: 0 28px;
         }
+        
+        /* ===== FULLY RESPONSIVE NAVBAR ===== */
         .nav-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
             padding: 16px 0;
+            position: relative;
+            flex-wrap: wrap;
         }
         .logo img {
             height: 55px;
@@ -73,7 +76,7 @@
         .nav-links {
             display: flex;
             gap: 32px;
-            flex-wrap: wrap;
+            align-items: center;
         }
         .nav-links a {
             text-decoration: none;
@@ -93,11 +96,84 @@
             display: inline-block;
             transition: all 0.3s;
             box-shadow: 0 4px 14px rgba(0, 212, 255, 0.3);
+            white-space: nowrap;
         }
         .btn-cyan:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 20px rgba(0, 212, 255, 0.5);
         }
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #00d4ff;
+            background: transparent;
+            border: none;
+            z-index: 110;
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                padding: 0 20px;
+            }
+            .menu-toggle {
+                display: block;
+                order: 2;
+            }
+            .logo {
+                order: 1;
+            }
+            .nav-bar > .reveal:last-child {
+                order: 3;
+            }
+            .nav-bar > .reveal:last-child .btn-cyan {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                width: 100%;
+                background: rgba(10, 22, 40, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+                z-index: 999;
+                border-top: 1px solid rgba(0, 212, 255, 0.2);
+                border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+                order: 4;
+            }
+            .nav-links.active {
+                max-height: 400px;
+                padding: 20px 0;
+            }
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 14px 20px;
+                font-size: 1.05rem;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            .nav-links a:hover {
+                background: rgba(0, 212, 255, 0.1);
+                color: #00d4ff;
+            }
+        }
+        @media (max-width: 480px) {
+            .logo img { height: 45px; }
+            .menu-toggle { font-size: 1.5rem; }
+            .nav-bar > .reveal:last-child .btn-cyan { padding: 6px 14px; font-size: 0.75rem; }
+        }
+        /* ===== END NAVBAR ===== */
 
         .hero {
             padding: 70px 0 90px;
@@ -159,6 +235,9 @@
             animation: floatCyan 4s ease-in-out infinite;
             border-radius: 50px;
             box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 520px;
+            height: auto;
         }
         @keyframes floatCyan {
             0% { transform: translateY(0); }
@@ -177,7 +256,7 @@
         }
         .section-title span { color: #00d4ff; border-bottom: 3px solid #00d4ff; padding-bottom: 5px; }
 
-        /* 3D Flip Card Styles */
+        /* 3D Flip Card Styles - Responsive */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -307,10 +386,6 @@
             object-fit: cover;
             display: block;
         }
-        .slide-info {
-            padding: 18px;
-            text-align: center;
-        }
         .swiper-pagination-bullet { background: #3a5a7a; }
         .swiper-pagination-bullet-active { background: #00d4ff !important; }
         .swiper-button-next, .swiper-button-prev {
@@ -319,6 +394,9 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
+        }
+        @media (max-width: 600px) {
+            .swiper-button-next, .swiper-button-prev { display: none; }
         }
 
         .faq-cyan {
@@ -329,7 +407,7 @@
         }
         .faq-left { flex: 1.2; }
         .faq-right { flex: 1; border-radius: 40px; overflow: hidden; }
-        .faq-right img { width: 100%; height: auto; display: block; }
+        .faq-right img { width: 100%; height: auto; display: block; border-radius: 32px; }
         .faq-item {
             background: rgba(15, 30, 45, 0.6);
             border-radius: 24px;
@@ -472,6 +550,28 @@
             text-decoration: none;
             animation: pulseGreen 2s infinite;
         }
+        .chat-float {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: #00d4ff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #0a1628;
+            box-shadow: 0 6px 18px rgba(0,212,255,0.4);
+            transition: 0.3s;
+            z-index: 1000;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+            .whatsapp-float { width: 50px; height: 50px; font-size: 28px; bottom: 18px; right: 18px; }
+            .chat-float { width: 50px; height: 50px; font-size: 22px; bottom: 18px; left: 18px; }
+        }
         @keyframes pulseGreen {
             0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
             70% { box-shadow: 0 0 0 12px rgba(37,211,102,0); }
@@ -501,6 +601,7 @@
             display: flex;
             gap: 18px;
             margin-top: 15px;
+            flex-wrap: wrap;
         }
         .social-icons a {
             background: rgba(0, 212, 255, 0.1);
@@ -518,13 +619,81 @@
             color: #6a7a8f;
         }
 
+        /* Responsive Section Adjustments */
         @media (max-width: 800px) {
+            .hero { padding: 50px 0 60px; }
             .hero-content h1 { font-size: 2.2rem; }
-            .nav-bar { flex-direction: column; gap: 15px; }
+            .hero-flex { flex-direction: column; text-align: center; gap: 30px; }
+            .stats-row { justify-content: center; }
+            .section { padding: 55px 0; }
+            .section-title { font-size: 1.9rem; margin-bottom: 35px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .flip-card { height: 350px; }
+            .process-grid { flex-direction: column; align-items: center; }
+            .process-tile { width: 100%; max-width: 320px; }
             .faq-cyan { flex-direction: column; }
             .contact-grid { flex-direction: column; }
-            .contact-premium { padding: 30px 20px; }
-            .flip-card { height: 350px; }
+            .contact-premium { padding: 30px 20px; border-radius: 32px; }
+            .contact-info h3 { font-size: 1.6rem; }
+            .social-row { justify-content: center; }
+            .footer-grid { text-align: center; }
+            .social-icons { justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.5rem; }
+            .stat-cyan { padding: 5px 12px; font-size: 0.8rem; }
+            .flip-card-front h3 { font-size: 1.3rem; }
+            .btn-cyan { padding: 8px 20px; font-size: 0.85rem; }
+            .info-item i { width: 38px; height: 38px; font-size: 1rem; }
+            .upload-area { padding: 18px; }
+        }
+        
+        .gallery-card {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 24px;
+            cursor: pointer;
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-card:hover img { transform: scale(1.1); }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 50px 20px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        .gallery-card:hover .gallery-overlay { transform: translateY(0); }
+        .gallery-content { text-align: center; color: white; }
+        .gallery-content h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease 0.1s;
+        }
+        .gallery-content p {
+            font-size: 0.9rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease 0.2s;
+        }
+        .gallery-card:hover .gallery-content h4,
+        .gallery-card:hover .gallery-content p {
+            transform: translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
@@ -535,31 +704,6 @@
     <i class="fas fa-comments"></i>
 </a>
 
-<style>
-    .chat-float {
-    position: fixed;
-    bottom: 25px;
-    right: 1480px; /* 👈 WhatsApp se left side */
-    background: #00d4ff;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    color: #0a1628;
-    box-shadow: 0 6px 18px rgba(0,212,255,0.4);
-    transition: 0.3s;
-    z-index: 1000;
-    text-decoration: none;
-}
-
-.chat-float:hover {
-    transform: scale(1.1);
-}
-</style>
-
 <a href="https://wa.me/12482421376?text=Hi!%20Need%20junk%20removal%20quote" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
@@ -567,10 +711,11 @@
 <header>
     <div class="container nav-bar">
         <div class="logo reveal"><img src="https://lirp.cdn-website.com/3ef302d5/dms3rep/multi/opt/Simon+Junk+Removal+logo+red-1920w.png" alt="Simon Junk Removal"></div>
-        <div class="nav-links reveal">
+        <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+        <div class="nav-links" id="navLinks">
             <a href="#home">Home</a><a href="#services">Services</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
         </div>
-        <div class="reveal"><a href="#contact" class="btn-cyan"> Free Quote →</a></div>
+        <!-- <div class="reveal"><a href="#contact" class="btn-cyan">Free Quote →</a></div> -->
     </div>
 </header>
 
@@ -578,111 +723,32 @@
     <section id="home" class="hero">
         <div class="container hero-flex">
             <div class="hero-content reveal">
-                <div class="badge-cyan"> Maplewood's Most Trusted | 12+ Years</div>
+                <div class="badge-cyan">Maplewood's Most Trusted | 12+ Years</div>
                 <h1>Clear Your Space.<br><span style="color:#00d4ff;">Fast. Fair. Green.</span></h1>
                 <p style="font-size:1.1rem; margin: 18px 0 10px;">Professional junk removal services — from single items to full property cleanouts. Same-day service available.</p>
-                <a href="#contact" class="btn-cyan" style="padding:12px 34px;"> Get Free Estimate</a>
+                <a href="#contact" class="btn-cyan" style="padding:12px 34px;">Get Free Estimate</a>
                 <div class="stats-row">
-                    <div class="stat-cyan"> 3500+ projects</div>
-                    <div class="stat-cyan"> 95% recycled</div>
-                    <div class="stat-cyan"> 5.0 stars (412 reviews)</div>
+                    <div class="stat-cyan">3500+ projects</div>
+                    <div class="stat-cyan">95% recycled</div>
+                    <div class="stat-cyan">5.0 stars (412 reviews)</div>
                 </div>
             </div>
             <div class="reveal">
-                <img src="./download.jfif" class="hero-img-side" style="width:100%; max-width:520px; border-radius: 48px;" alt="Junk removal truck">
+                <img src="./download.jfif" class="hero-img-side" alt="Junk removal truck">
             </div>
         </div>
     </section>
 
-    <!-- Services with 3D Flip Cards -->
     <section id="services" class="section">
         <div class="container">
             <h2 class="section-title reveal">Our <span>Services</span></h2>
             <div class="services-grid">
-                <div class="flip-card reveal">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="service-icon"><i class="fas fa-home"></i></div>
-                            <h3>House Cleanout</h3>
-                            <p>Full home junk removal</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <i class="fas fa-home"></i>
-                            <p>Whole home, attic, basement — we remove everything. Stress-free & thorough service.</p>
-                            <!-- <div class="price"> from $179</div> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card reveal">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="service-icon"><i class="fas fa-car"></i></div>
-                            <h3>Garage Cleanout</h3>
-                            <p>Reclaim your garage space</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <i class="fas fa-car"></i>
-                            <p>Old tools, furniture, boxes, appliances — gone in hours. Same-day service available.</p>
-                            <div class="price"> Same day available</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card reveal">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="service-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                            <h3>Hoarder Cleanout</h3>
-                            <p>Compassionate support</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <i class="fas fa-hand-holding-heart"></i>
-                            <p>Discreet, compassionate & professional junk removal support. Judgment-free service.</p>
-                            <div class="price"> Judgment-free</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card reveal">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="service-icon"><i class="fas fa-building"></i></div>
-                            <h3>Eviction Cleanout</h3>
-                            <p>Fast property turnaround</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <i class="fas fa-building"></i>
-                            <p>Fast junk removal for landlords & property managers. Quick unit turnover.</p>
-                            <div class="price"> 48h turnaround</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card reveal">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="service-icon"><i class="fas fa-hammer"></i></div>
-                            <h3>Demolition Hauling</h3>
-                            <p>Debris removal services</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <i class="fas fa-hammer"></i>
-                            <p>Kitchens, sheds, decks — full debris haul away after light demolition.</p>
-                            <div class="price">🔨 Full debris removal</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card reveal">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="service-icon"><i class="fas fa-tree"></i></div>
-                            <h3>Estate Cleanout</h3>
-                            <p>Respectful & green disposal</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <i class="fas fa-tree"></i>
-                            <p>Respectful handling with donation & recycling program. We care for your loved ones' belongings.</p>
-                            <div class="price"> Donation + recycling</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="flip-card reveal"><div class="flip-card-inner"><div class="flip-card-front"><div class="service-icon"><i class="fas fa-home"></i></div><h3>House Cleanout</h3><p>Full home junk removal</p></div><div class="flip-card-back"><i class="fas fa-home"></i><p>Whole home, attic, basement — we remove everything. Stress-free & thorough service.</p></div></div></div>
+                <div class="flip-card reveal"><div class="flip-card-inner"><div class="flip-card-front"><div class="service-icon"><i class="fas fa-car"></i></div><h3>Garage Cleanout</h3><p>Reclaim your garage space</p></div><div class="flip-card-back"><i class="fas fa-car"></i><p>Old tools, furniture, boxes, appliances — gone in hours. Same-day service available.</p><div class="price">Same day available</div></div></div></div>
+                <div class="flip-card reveal"><div class="flip-card-inner"><div class="flip-card-front"><div class="service-icon"><i class="fas fa-hand-holding-heart"></i></div><h3>Hoarder Cleanout</h3><p>Compassionate support</p></div><div class="flip-card-back"><i class="fas fa-hand-holding-heart"></i><p>Discreet, compassionate & professional junk removal support. Judgment-free service.</p></div></div></div>
+                <div class="flip-card reveal"><div class="flip-card-inner"><div class="flip-card-front"><div class="service-icon"><i class="fas fa-building"></i></div><h3>Eviction Cleanout</h3><p>Fast property turnaround</p></div><div class="flip-card-back"><i class="fas fa-building"></i><p>Fast junk removal for landlords & property managers. Quick unit turnover.</p><div class="price">48h turnaround</div></div></div></div>
+                <div class="flip-card reveal"><div class="flip-card-inner"><div class="flip-card-front"><div class="service-icon"><i class="fas fa-hammer"></i></div><h3>Demolition Hauling</h3><p>Debris removal services</p></div><div class="flip-card-back"><i class="fas fa-hammer"></i><p>Kitchens, sheds, decks — full debris haul away after light demolition.</p><div class="price">Full debris removal</div></div></div></div>
+                <div class="flip-card reveal"><div class="flip-card-inner"><div class="flip-card-front"><div class="service-icon"><i class="fas fa-tree"></i></div><h3>Estate Cleanout</h3><p>Respectful & green disposal</p></div><div class="flip-card-back"><i class="fas fa-tree"></i><p>Respectful handling with donation & recycling program. We care for your loved ones' belongings.</p><div class="price">Donation + recycling</div></div></div></div>
             </div>
         </div>
     </section>
@@ -691,10 +757,10 @@
         <div class="container">
             <h2 class="section-title reveal">How <span>We Work</span></h2>
             <div class="process-grid">
-                <div class="process-tile reveal"><div class="process-num">1</div><h3> Free Quote</h3><p>Call or text — get price instantly</p></div>
-                <div class="process-tile reveal"><div class="process-num">2</div><h3> Schedule</h3><p>Pick time that suits you</p></div>
-                <div class="process-tile reveal"><div class="process-num">3</div><h3> We Haul</h3><p>We load, sweep, clean up</p></div>
-                <div class="process-tile reveal"><div class="process-num">4</div><h3> Green Disposal</h3><p>Donate & recycle maximum</p></div>
+                <div class="process-tile reveal"><div class="process-num">1</div><h3>Free Quote</h3><p>Call or text — get price instantly</p></div>
+                <div class="process-tile reveal"><div class="process-num">2</div><h3>Schedule</h3><p>Pick time that suits you</p></div>
+                <div class="process-tile reveal"><div class="process-num">3</div><h3>We Haul</h3><p>We load, sweep, clean up</p></div>
+                <div class="process-tile reveal"><div class="process-num">4</div><h3>Green Disposal</h3><p>Donate & recycle maximum</p></div>
             </div>
         </div>
     </section>
@@ -703,174 +769,36 @@
         <div class="container">
             <h2 class="section-title reveal">Why <span>Choose Us?</span></h2>
             <div class="services-grid">
-                <div class="flip-card reveal">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front"><div class="service-icon"><i class="fas fa-bolt"></i></div><h3>Lightning Fast</h3><p>Quick response time</p></div>
-                        <div class="flip-card-back"><i class="fas fa-bolt"></i><p>Local team arrives within 1-2 hours for urgent junk removal jobs.</p><div class="price"> 1-2 hour arrival</div></div>
+                <div class="flip-card reveal"><div class="flip-card-inner"><div class="flip-card-front"><div class="service-icon"><i class="fas fa-bolt"></i></div><h3>Lightning Fast</h3><p>Quick response time</p></div><div class="flip-card-back"><i class="fas fa-bolt"></i><p>Local team arrives within 1-2 hours for urgent junk removal jobs.</p><div class="price">1-2 hour arrival</div></div></div></div>
+                <div class="flip-card reveal"><div class="flip-card-inner"><div class="flip-card-front"><div class="service-icon"><i class="fas fa-dollar-sign"></i></div><h3>Upfront Price</h3><p>No hidden fees</p></div><div class="flip-card-back"><i class="fas fa-dollar-sign"></i><p>No surprises — you know the cost before we start any work.</p><div class="price">Transparent pricing</div></div></div></div>
+                <div class="flip-card reveal"><div class="flip-card-inner"><div class="flip-card-front"><div class="service-icon"><i class="fas fa-leaf"></i></div><h3>Eco Friendly</h3><p>Green disposal</p></div><div class="flip-card-back"><i class="fas fa-leaf"></i><p>We donate & recycle over 90% of what we collect from your property.</p><div class="price">90%+ recycled</div></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section-alt">
+        <div class="container">
+            <h2 class="section-title reveal"><span>Recent Projects</span></h2>
+            <p style="text-align:center; margin-bottom: 35px;">Real cleanouts across Maplewood, NJ</p>
+            <div class="gallery-wrap reveal">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><div class="gallery-card"><img src="./02.jpeg" alt="Garage cleanout"><div class="gallery-overlay"><div class="gallery-content"><h4>Garage Transformation</h4><p>3 tons removed</p></div></div></div></div>
+                        <div class="swiper-slide"><div class="gallery-card"><img src="./03.jpeg" alt="House cleanout"><div class="gallery-overlay"><div class="gallery-content"><h4>Full House Estate</h4><p>Donated 45%</p></div></div></div></div>
+                        <div class="swiper-slide"><div class="gallery-card"><img src="./04.jpeg" alt="Demolition"><div class="gallery-overlay"><div class="gallery-content"><h4>Demolition Hauling</h4><p>Shed + debris</p></div></div></div></div>
+                        <div class="swiper-slide"><div class="gallery-card"><img src="./05.jpeg" alt="Eviction"><div class="gallery-overlay"><div class="gallery-content"><h4>Eviction Cleanout</h4><p>48h turnaround</p></div></div></div></div>
                     </div>
-                </div>
-                <div class="flip-card reveal">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front"><div class="service-icon"><i class="fas fa-dollar-sign"></i></div><h3>Upfront Price</h3><p>No hidden fees</p></div>
-                        <div class="flip-card-back"><i class="fas fa-dollar-sign"></i><p>No surprises — you know the cost before we start any work.</p><div class="price"> Transparent pricing</div></div>
-                    </div>
-                </div>
-                <div class="flip-card reveal">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front"><div class="service-icon"><i class="fas fa-leaf"></i></div><h3>Eco Friendly</h3><p>Green disposal</p></div>
-                        <div class="flip-card-back"><i class="fas fa-leaf"></i><p>We donate & recycle over 90% of what we collect from your property.</p><div class="price"> 90%+ recycled</div></div>
-                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <!-- Gallery Slider with Hover Effect -->
-<section id="gallery" class="section-alt">
-    <div class="container">
-        <h2 class="section-title reveal"><span>Recent Projects</span></h2>
-        <p style="text-align:center; margin-bottom: 35px;">Real cleanouts across Maplewood, NJ</p>
-        <div class="gallery-wrap reveal">
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="gallery-card">
-                            <img src="./02.jpeg" alt="Garage cleanout">
-                            <div class="gallery-overlay">
-                                <div class="gallery-content">
-                                    <h4>Garage Transformation</h4>
-                                    <p>3 tons removed</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gallery-card">
-                            <img src="./03.jpeg" alt="House cleanout">
-                            <div class="gallery-overlay">
-                                <div class="gallery-content">
-                                    <h4>Full House Estate</h4>
-                                    <p>Donated 45%</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gallery-card">
-                            <img src="./04.jpeg" alt="Demolition">
-                            <div class="gallery-overlay">
-                                <div class="gallery-content">
-                                    <h4>Demolition Hauling</h4>
-                                    <p>Shed + debris</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gallery-card">
-                            <img src="./05.jpeg" alt="Eviction">
-                            <div class="gallery-overlay">
-                                <div class="gallery-content">
-                                    <h4>Eviction Cleanout</h4>
-                                    <p>48h turnaround</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="swiper-slide">
-                        <div class="gallery-card">
-                            <img src="https://images.pexels.com/photos/4107316/pexels-photo-4107316.jpeg?w=800&h=500&fit=crop" alt="Hoarder">
-                            <div class="gallery-overlay">
-                                <div class="gallery-content">
-                                    <h4>Hoarder Cleanout</h4>
-                                    <p>Compassionate care</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<style>
-    /* Gallery Card Styles */
-.gallery-card {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    border-radius: 24px;
-    cursor: pointer;
-    margin: 20px;
-}
-
-.gallery-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    
-}
-
-.gallery-card:hover img {
-    transform: scale(1.1);
-}
-
-.gallery-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    padding: 50px 20px 20px 20px;
-    transform: translateY(100%);
-    transition: transform 0.4s ease;
-}
-
-.gallery-card:hover .gallery-overlay {
-    transform: translateY(0);
-}
-
-.gallery-content {
-    text-align: center;
-    color: white;
-}
-
-.gallery-content h4 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    transform: translateY(20px);
-    opacity: 0;
-    transition: all 0.3s ease 0.1s;
-}
-
-.gallery-content p {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    transform: translateY(20px);
-    opacity: 0;
-    transition: all 0.3s ease 0.2s;
-}
-
-.gallery-card:hover .gallery-content h4,
-.gallery-card:hover .gallery-content p {
-    transform: translateY(0);
-    opacity: 1;
-}
-</style>
-
-    <!-- FAQ with Image -->
     <section id="faq" class="section">
         <div class="container">
-            <h2 class="section-title reveal"> <span>Common Questions</span></h2>
+            <h2 class="section-title reveal"><span>Common Questions</span></h2>
             <div class="faq-cyan">
                 <div class="faq-left reveal">
                     <div class="faq-item"><div class="faq-question"><span>How fast can you come?</span><span>▼</span></div><div class="faq-answer">Same-day or next-day service. Emergency slots available.</div></div>
@@ -879,14 +807,11 @@
                     <div class="faq-item"><div class="faq-question"><span>How is pricing calculated?</span><span>▼</span></div><div class="faq-answer">Based on volume — free upfront quote before work starts.</div></div>
                     <div class="faq-item"><div class="faq-question"><span>Do you donate usable items?</span><span>▼</span></div><div class="faq-answer">Yes! We partner with local charities for furniture & electronics.</div></div>
                 </div>
-                <div class="faq-right reveal">
-                    <img src="./01.webp" alt="Junk removal team working">
-                </div>
+                <div class="faq-right reveal"><img src="./01.webp" alt="Junk removal team working"></div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container contact-premium reveal">
             <div class="contact-grid">
@@ -930,14 +855,15 @@
             <div class="footer-col"><h4>Services</h4><a href="#">House Cleanout</a><a href="#">Garage Cleanout</a><a href="#">Estate Cleanout</a><a href="#">Demolition Hauling</a></div>
             <div class="footer-col"><h4>Contact Info</h4><p><i class="fas fa-phone"></i> (248) 242-1376</p><p><i class="fas fa-envelope"></i> salvadorgutierrez2012@gmail.com</p><p><i class="fas fa-map-marker-alt"></i> Maplewood, NJ 07040</p></div>
         </div>
-        <div class="copyright"><p>© 2025 Simon Junk Removal. All rights reserved. | Eco-friendly junk removal | License #JR-2847-NJ</p><p> We recycle. We donate. We care about our planet.</p></div>
+        <div class="copyright"><p>© 2025 Simon Junk Removal. All rights reserved. | Eco-friendly junk removal | License #JR-2847-NJ</p><p>We recycle. We donate. We care about our planet.</p></div>
     </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+    // Custom cursor (desktop only)
     const cur = document.querySelector('.custom-cursor');
-    if(cur) {
+    if(cur && window.innerWidth > 800) {
         document.addEventListener('mousemove', (e) => {
             cur.style.left = e.clientX + 'px';
             cur.style.top = e.clientY + 'px';
@@ -946,24 +872,28 @@
             el.addEventListener('mouseenter', () => { cur.style.transform = 'translate(-50%, -50%) scale(2.2)'; cur.style.background = '#66e0ff'; });
             el.addEventListener('mouseleave', () => { cur.style.transform = 'translate(-50%, -50%) scale(1)'; cur.style.background = '#00d4ff'; });
         });
-    }
+    } else if(cur) cur.style.display = 'none';
 
+    // Reveal animations
     const reveals = document.querySelectorAll('.reveal');
     const obs = new IntersectionObserver((e) => {
         e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.12 });
     reveals.forEach(r => obs.observe(r));
 
+    // Swiper gallery
     new Swiper('.mySwiper', {
         loop: true, autoplay: { delay: 3000 }, pagination: { el: '.swiper-pagination', clickable: true },
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         slidesPerView: 1, breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
     });
 
+    // FAQ toggle
     document.querySelectorAll('.faq-item').forEach(item => {
         item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('active'));
     });
 
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const target = this.getAttribute('href');
@@ -972,9 +902,44 @@
             if(el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
         });
     });
-    window.addEventListener('load', () => {
-        reveals.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight-80) el.classList.add('active'); });
-    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if(menuToggle) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if(icon) {
+                if(navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
+        // Close menu when link clicked
+        document.querySelectorAll('#navLinks a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                if(icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
+            });
+        });
+        // Close when clicking outside
+        document.addEventListener('click', (event) => {
+            if(window.innerWidth <= 800 && navLinks && menuToggle) {
+                if(!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
+                    navLinks.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    if(icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>
